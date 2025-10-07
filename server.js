@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import busRoute from "./routes/busRoute.js";
+import routeRoute from "./routes/routeRoute.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/api/buses", busRoute);
+app.use("/api/routes", routeRoute);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

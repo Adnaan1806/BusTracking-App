@@ -4,7 +4,7 @@ const stopSchema = new mongoose.Schema({
   name: { type: String, required: true },
   lat: { type: Number, required: true },
   lng: { type: Number, required: true },
-  stopOrder: { type: Number, required: true }
+  stopOrder: { type: Number, required: true },
 });
 
 const routeSchema = new mongoose.Schema({
@@ -13,7 +13,7 @@ const routeSchema = new mongoose.Schema({
   origin: { type: String, required: true },
   destination: { type: String, required: true },
   distanceKm: { type: Number },
-  stops: { type: [stopSchema], required: true }
+  stops: { type: [stopSchema], required: true },
 });
 
 export default mongoose.model("Route", routeSchema);
