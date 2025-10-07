@@ -11,7 +11,7 @@ const tripSchema = new mongoose.Schema({
     enum: ["scheduled", "enroute", "completed", "cancelled"], 
     default: "scheduled" 
   },
-  Date: { type: String, required: true }
+  date: { type: String, required: true }
 });
 
 export default mongoose.model("Trip", tripSchema);
