@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import busRoute from "./routes/busRoute.js";
 import routeRoute from "./routes/routeRoute.js";
 import tripRoute from "./routes/tripRoute.js";
+import locationRoute from "./routes/locationRoute.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ mongoose
 app.use("/api/buses", busRoute);
 app.use("/api/routes", routeRoute);
 app.use("/api/trips", tripRoute);
+app.use("/api/locations", locationRoute);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

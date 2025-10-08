@@ -5,7 +5,7 @@ const locationSchema = new mongoose.Schema({
   tripId: { type: mongoose.Schema.Types.ObjectId, ref: "Trip", required: true },
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now },
 });
 
 export default mongoose.model("Location", locationSchema);
