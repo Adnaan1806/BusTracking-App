@@ -6,6 +6,7 @@ import busRoute from "./routes/busRoute.js";
 import routeRoute from "./routes/routeRoute.js";
 import tripRoute from "./routes/tripRoute.js";
 import locationRoute from "./routes/locationRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ mongoose
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+app.use("/api/users", userRoute);
 app.use("/api/buses", busRoute);
 app.use("/api/routes", routeRoute);
 app.use("/api/trips", tripRoute);
