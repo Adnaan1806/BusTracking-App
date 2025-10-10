@@ -56,4 +56,28 @@ const getBusById = async (req, res) => {
   }
 };
 
-export { addBus, getAllBuses, editBus, deleteBus, getBusById };
+
+const updateBusLocation = async (req, res) => {
+  const { id } = req.params;
+  const { lat, lng } = req.body;
+
+  try {
+    const bus = await BusModel.findById(id);
+    if (!bus) {
+      return res.status(404).json({ message: "Bus not found" });
+    }
+
+    bus.currentLat = lat;
+    bus.currentLng = lng;
+    bus.lastUpdated = Date.now();
+
+    await bus.save();
+
+    res.status(200).json({ message: "Location updated successfully", bus });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+export { addBus, getAllBuses, editBus, deleteBus, getBusById, updateBusLocation };
