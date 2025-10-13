@@ -7,7 +7,7 @@ const busSchema = new mongoose.Schema({
   passengerCount: { type: Number, required: true },
   active: { type: Boolean, default: true },
   routeId: { type: mongoose.Schema.Types.ObjectId, ref: "Route" },
-  currentStopIndex: { type: Number, default: 0 },
+  latestStop: { type: Number, default: 0 },
   currentLat: { type: Number, default: null },
   currentLng: { type: Number, default: null },
   lastUpdated: { type: Date, default: Date.now }

@@ -15,25 +15,25 @@ const BusLiveMovement = async () => {
       const bus = await Bus.findById(trip.busId);
       if (!bus) continue;
 
-      const currentStop = route.stops[bus.currentStopIndex];
-      const nextStopIndex = (bus.currentStopIndex + 1) % route.stops.length;
-      const nextStop = route.stops[nextStopIndex];
+      const currentStop = route.stops[bus.latestStop];
+      const stoppingPoint = (bus.latestStop + 1) % route.stops.length;
+      const nextStop = route.stops[stoppingPoint];
 
       
       const progress = Math.random() * 0.3 + 0.3; //calculations to keep the location changing by small degree
-      const newLat = currentStop.lat + (nextStop.lat - currentStop.lat) * progress;
-      const newLng = currentStop.lng + (nextStop.lng - currentStop.lng) * progress;
+      const latestLat = currentStop.lat + (nextStop.lat - currentStop.lat) * progress;
+      const latestLng = currentStop.lng + (nextStop.lng - currentStop.lng) * progress;
 
      
-      const distanceToNextStop = Math.abs(newLat - nextStop.lat) + Math.abs(newLng - nextStop.lng);
+      const distanceToNextStop = Math.abs(latestLat - nextStop.lat) + Math.abs(latestLng - nextStop.lng);
       const reachedNextStop = distanceToNextStop < 0.01;
 
       if (reachedNextStop) {
-        bus.currentStopIndex = nextStopIndex;
+        bus.latestStop = stoppingPoint;
       }
 
-      bus.currentLat = newLat;
-      bus.currentLng = newLng;
+      bus.currentLat = latestLat;
+      bus.currentLng = latestLng;
       bus.lastUpdated = new Date();
       await bus.save();
 
@@ -41,8 +41,8 @@ const BusLiveMovement = async () => {
       await Location.create({
         busId: trip.busId,
         tripId: trip._id,
-        latitude: newLat,
-        longitude: newLng,
+        latitude: latestLat,
+        longitude: latestLng,
         date: new Date(),
       });
 

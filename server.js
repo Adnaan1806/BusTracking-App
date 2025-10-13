@@ -33,5 +33,5 @@ app.use("/api/locations", locationRoute);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  setInterval(BusLiveMovement, 50000);
+  setInterval(BusLiveMovement, 10000);
 });
